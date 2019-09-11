@@ -9,13 +9,14 @@ All code for the creation of my AI will be showed in thie repository after the f
 Talk is cheap! I will show you my code.
 
 + **Lab1**: Program a rat that moves randomly while avoiding walls
-  + Code admitted: improved_random.py at 06/09/2019
+  + Code admitted: improved_random.py at 06/09/2019, DataAnalyse.py at 11/09/2019
   + Question found: 
     + In the project PyRat, a file named *random.py* which may cause problems in importing library *numpy*
   + Skilled learned:
     + Meet library *numpy*
+	+ Meet library *matpltlib*
   + Lessons:
-    + To read source code *pyrat.py* is necessary for a easier work, or you will worry about if should check the validity of the move like me that is no need to worry about.
+    + Read source code *pyrat.py* is necessary
 
 ---
 **Xidian University / IMT Atlantique**

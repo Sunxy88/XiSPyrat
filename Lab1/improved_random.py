@@ -22,29 +22,30 @@ DIRECTION_TO_CALCULATION = {
 # Please put your imports here
 import random
 import numpy
+import time
 
 ###############################
 # Globla variable 
 # A set remebers all the cell that have been visited
 cellVisited = set()
 
-def randomVisite():
-    possibilities = [MOVE_DOWN, MOVE_LEFT, MOVE_RIGHT, MOVE_UP]
-    return random.choice(possibilities)
+# Calculate the direction according to player location and next location
+def calMove(playerLocation, nextLocation):
+    move_vector = tuple(numpy.subtract(nextLocation, playerLocation))
+    for MOVE in DIRECTION_TO_CALCULATION:
+        if move_vector == DIRECTION_TO_CALCULATION[MOVE]:
+            return MOVE
 
-# Calculate next position according to the origin location and next move
-def calcuNextPosition(playerLocation, move = ()):
-    nextLocation = tuple(numpy.add(playerLocation, move))
-    return nextLocation
+def randomVisite(playerLocation, mazeMap):
+    possibilities = list(mazeMap[playerLocation].keys())
+    return calMove(playerLocation, random.choice(possibilities))
 
 # Choose next location according to two principals
-def chooseNextLocation(playerLocation):
-    for MOVE in DIRECTION_TO_CALCULATION:
-        nextLocation = calcuNextPosition(playerLocation, DIRECTION_TO_CALCULATION[MOVE])
-        if nextLocation not in cellVisited:
-            cellVisited.add(nextLocation)
-            return MOVE
-    return randomVisite()
+def chooseNextLocation(playerLocation, mazeMap):
+    for nextPossibleLocation in mazeMap[playerLocation]:
+        if nextPossibleLocation not in cellVisited:
+            return calMove(playerLocation, nextPossibleLocation)
+    return randomVisite(playerLocation, mazeMap)
 
 ###############################
 # Preprocessing function
@@ -83,5 +84,8 @@ def preprocessing(mazeMap, mazeWidth, mazeHeight, playerLocation, opponentLocati
 ###############################
 # This function is expected to return a move
 def turn(mazeMap, mazeWidth, mazeHeight, playerLocation, opponentLocation, playerScore, opponentScore, piecesOfCheese, timeAllowed):
- 
-    return chooseNextLocation(playerLocation)
+    cellVisited.add(playerLocation)
+    # print("Player LocationL:", playerLocation)
+    # print("Visted:", cellVisited)
+    # time.sleep(5)
+    return chooseNextLocation(playerLocation, mazeMap)

@@ -2,6 +2,7 @@
 # The standard how we choose next square to visit:
 # We move on a square not visited yet
 # If impossible, we move at random
+# Copyright: Xi SONG 05/09/2019
 
 ###############################
 # When the player is performing a move, it actually sends a character to the main program
@@ -22,7 +23,6 @@ DIRECTION_TO_CALCULATION = {
 # Please put your imports here
 import random
 import numpy
-import time
 
 ###############################
 # Globla variable 
@@ -85,7 +85,4 @@ def preprocessing(mazeMap, mazeWidth, mazeHeight, playerLocation, opponentLocati
 # This function is expected to return a move
 def turn(mazeMap, mazeWidth, mazeHeight, playerLocation, opponentLocation, playerScore, opponentScore, piecesOfCheese, timeAllowed):
     cellVisited.add(playerLocation)
-    # print("Player LocationL:", playerLocation)
-    # print("Visted:", cellVisited)
-    # time.sleep(5)
     return chooseNextLocation(playerLocation, mazeMap)

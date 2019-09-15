@@ -21,7 +21,7 @@ Talk is cheap! I will show you my code.
 + **Lab2**: Implement a BFS under the condition of unweighted graphs
   + Code admitted: BFS_rome.py at 15/09/2019
   + Question found:
-    + Every turn, main program calls function *turn*, however I wrote the code with the imagination that only one call of this function and the pause of this thread. So it is necessary to make this code correct.
+    + (**Solved**) Every turn, main program calls function *turn*, however I wrote the code with the imagination that only one call of this function and the pause of this thread. So it is necessary to make this code correct. -> Use a file *instructions.txt* to guide the rat
   + Lessons learned:
     + Before starting to code, it is vital to understand clearly the demand
 ---

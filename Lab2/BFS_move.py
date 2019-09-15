@@ -2,7 +2,7 @@
 # implementation of queue structure. 
 # ATTENTION: In a maze without mud -> An unweighted graph
 # Copyright: Xi SONG 14/09/2019
-# TODO: 思考每次轮到我的turn时如何保存上一回合的状态
+
 
 ###############################
 # When the player is performing a move, it actually sends a character to the main program
@@ -21,11 +21,11 @@ DIRECTION_TO_CALCULATION = {
 
 ###############################
 # Please put your imports here
-
+import numpy as np
 
 ###############################
 # Please put your global variables here
-ins = []    # Instructions used to guide rat
+ins = {}    # Instructions used to guide rat
 
 class Q:
     """
@@ -73,7 +73,7 @@ class Q:
 
 # Calculate the direction according to player location and next location
 def calMove(playerLocation, nextLocation):
-    move_vector = tuple(numpy.subtract(nextLocation, playerLocation))
+    move_vector = tuple(np.subtract(nextLocation, playerLocation))
     for MOVE in DIRECTION_TO_CALCULATION:
         if move_vector == DIRECTION_TO_CALCULATION[MOVE]:
             return MOVE
@@ -88,12 +88,11 @@ def findShortestPath(routeTable, piecesOfCheese):
 
     Return: A list filled with instructions from the beginning to the destination
     """
-    instructions = []
+    instructions = {}
     currentVertex = piecesOfCheese[0]
-    
-    while routeTable[currentVertex]:
+    while routeTable[currentVertex] != None:
         move = calMove(routeTable[currentVertex], currentVertex)
-        instructions.insert(0, move)
+        instructions[routeTable[currentVertex]] = move
         currentVertex = routeTable[currentVertex]
 
     return instructions
@@ -117,10 +116,10 @@ def BFS(mazeMap, playerLocation, piecesOfCheese):
 
     toolQueue.push((playerLocation, None))
 
-    while piecesOfCheese[0] not in list(routeTable.keys): # no need to calculate the shortest paths to all vertices
+    while piecesOfCheese[0] not in list(routeTable.keys()): # no need to calculate the shortest paths to all vertices
         currentVertex = toolQueue.pop()
         # Add vertex and its father node to the route table
-        if currentVertex[0] not in list(routeTable.keys):
+        if currentVertex[0] not in list(routeTable.keys()):
             routeTable[currentVertex[0]] = currentVertex[1]
         else:
             continue
@@ -130,10 +129,6 @@ def BFS(mazeMap, playerLocation, piecesOfCheese):
     
     return routeTable
 
-
-
-
-        
 
 ###############################
 # Preprocessing function
@@ -154,6 +149,10 @@ def BFS(mazeMap, playerLocation, piecesOfCheese):
 def preprocessing(mazeMap, mazeWidth, mazeHeight, playerLocation, opponentLocation, piecesOfCheese, timeAllowed):
     routeTable = BFS(mazeMap, playerLocation, piecesOfCheese)
     ins = findShortestPath(routeTable, piecesOfCheese)
+    with open("instructions.txt", 'w') as f:    # Use instructions.txt to save the prepared path
+        for key in ins:
+            line = str(key) + ':' + str(ins[key]) + '\n'
+            f.write(line)
 
 ###############################
 # Turn function
@@ -173,5 +172,12 @@ def preprocessing(mazeMap, mazeWidth, mazeHeight, playerLocation, opponentLocati
 ###############################
 # This function is expected to return a move
 def turn(mazeMap, mazeWidth, mazeHeight, playerLocation, opponentLocation, playerScore, opponentScore, piecesOfCheese, timeAllowed):
-    
-    pass
+    instructions = {}
+    with open("instructions.txt") as f:
+        for line in f.readlines():
+            strip = line.split(':')
+            instructions[strip[0]] = strip[1][0]
+    # print(instructions)
+
+    return instructions[str(playerLocation)]
+    # return MOVE_DOWN

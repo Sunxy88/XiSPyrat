@@ -22,7 +22,9 @@ Talk is cheap! I will show you my code.
   + Code admitted: BFS_rome.py at 15/09/2019
   + Question found:
     + (**Solved**) Every turn, main program calls function *turn*, however I wrote the code with the imagination that only one call of this function and the pause of this thread. So it is necessary to make this code correct. -> Use a file *instructions.txt* to guide the rat
+	+ While coding the DFS, the recursion can not be terminated. -> Have to clearly understand the termination condition for a recursion function
   + Lessons learned:
     + Before starting to code, it is vital to understand clearly the demand
+	+ In every recursion function, we must shrewdly consider all the possible conditions for the determination of a recursion or we will get lost and a stack overflow.
 ---
 **Xidian University / IMT Atlantique**

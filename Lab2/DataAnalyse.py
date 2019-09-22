@@ -50,12 +50,16 @@ def main():
     sheet1 = workbook1.sheet_by_name('Sheet1')
     workbook2 = xlrd.open_workbook('/Users/xisung/Desktop/StudyHard/AlgorithmandDiscretMath/AI_XiS/Lab2/DFS_Statistics.xlsx')
     sheet2 = workbook2.sheet_by_name('Sheet1')
+    workbook3 = xlrd.open_workbook('/Users/xisung/Desktop/StudyHard/AlgorithmandDiscretMath/AI_XiS/Lab2/IDDFS_Statistics.xlsx')
+    sheet3 = workbook3.sheet_by_name('Sheet1')
 
     table1 = fillTheTable(sheet1)
     table2 = fillTheTable(sheet2)
+    table3 = fillTheTable(sheet3)
 
     table1 = calAverage(table1)
     table2 = calAverage(table2)
+    table3 = calAverage(table3)
 
 # Plot with multiple subplotss
     plt.figure()
@@ -64,6 +68,7 @@ def main():
     plt.subplot(2, 1, 1)
     plt.plot([i * i for i in table1['Width of maze']], table1['Moves'], color="r", label="BFS")
     plt.plot([i * i for i in table1['Width of maze']], table2['Moves'], color="g", label="DFS")
+    plt.plot([i * i for i in table1['Width of maze']], table3['Moves'], color="y", label="IDDFS")
     plt.legend(loc='upper left')
     plt.title("Moves / Size")
     plt.xlabel("Size of maze")
@@ -73,6 +78,7 @@ def main():
     plt.subplot(2, 2, 3)
     plt.plot([i * i for i in table1['Width of maze']], table1['Prepared time'], color='r', label="BFS")
     plt.plot([i * i for i in table1['Width of maze']], table2['Prepared time'], color='g', label="DFS")
+    plt.plot([i * i for i in table1['Width of maze']], table3['Prepared time'], color='y', label="IDDFS")
     plt.legend(loc='upper left')
     plt.title("Prepared time / Size")
     plt.xlabel("Size of maze")
@@ -83,6 +89,7 @@ def main():
     plt.subplot(2, 2, 4)
     plt.plot([i * i for i in table1['Width of maze']], table1['Turn time'], color='r', label="BFS")
     plt.plot([i * i for i in table1['Width of maze']], table2['Turn time'], color='g', label="DFS")
+    plt.plot([i * i for i in table1['Width of maze']], table3['Turn time'], color='Y', label="IDDFS")
     plt.legend(loc='upper left')
     plt.title("Turn time / Size")
     plt.xlabel("Size of maze")

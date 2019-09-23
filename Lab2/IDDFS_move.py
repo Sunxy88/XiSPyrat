@@ -1,7 +1,7 @@
 # Lab2: Implement BFS to get only one peace of cheese with the 
 # implementation of queue structure. 
 # ATTENTION: In a maze without mud -> An unweighted graph
-# Copyright: Xi SONG 14/09/2019
+# Copyright: Xi SONG 21/09/2019
 
 
 ###############################

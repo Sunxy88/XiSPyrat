@@ -24,8 +24,8 @@ Talk is cheap! I will show you my code.
   + Question found:
     + (**Solved**) Every turn, main program calls function *turn*, however I wrote the code with the imagination that only one call of this function and the pause of this thread. So it is necessary to make this code correct. -> Use a file *instructions.txt* to guide the rat
 	+ (**Solved**)While coding the DFS, the recursion can not be terminated. -> Have to clearly understand the termination condition for a recursion function
-	+ In beam search, which cost fonction should be chosen for the heuristic cost? **Maybe** <u>Euclidean distance</u> is a good choice.
-	+ Also in beam search, how should we choose an approprate beam width, for 3 at most? For this reason, I am wandering if it is practical to use beam search in this game.
+	+ (**Solved**)In beam search, which cost fonction should be chosen for the heuristic cost? **Maybe** <u>Euclidean distance</u> is a good choice.
+	+ (**Solved**)Also in beam search, how should we choose an approprate beam width, for 3 at most? For this reason, I am wandering if it is practical to use beam search in this game. -> Yes it is not interesting.
 	+ In shell script, how to automatically kill the process elegantly?
   + Lessons learned:
     + Before starting to code, it is vital to understand clearly the demand

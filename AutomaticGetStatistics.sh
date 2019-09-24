@@ -22,7 +22,7 @@ i=$iniLen
 while(( ${i} <= ${iniLen} ))
 do
 # Here you should replace the path by your own TODO: How to automatically kill the process?
-	result=$(python3 /Users/xisung/Desktop/StudyHard/AlgorithmandDiscretMath/PyRat-master/pyrat.py -x $i -y $i -p 1 -md 0 --rat ${fileName})
+	result=$(python3 /Users/xisung/Desktop/StudyHard/AlgorithmandDiscretMath/PyRat-master/pyrat.py -x $i -y $i -p 1 -md 0 --nodrawing --test 10 --synchronous--rat ${fileName})
 	moves=$(echo $result | grep "moves_rat" | cut -f6 -d ":" | cut -f1 -d "\"")
 	preptime=$(echo $result | grep "prep_time_rat" | cut -f8 -d ":" | cut -f1 -d "\"")
 	turntime=$(echo $result | grep "turn_time_rat" | cut -f14 -d ":"| cut -f1 -d "\"")

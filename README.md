@@ -20,20 +20,20 @@ Talk is cheap! I will show you my code.
 
 + **Lab2**: Implement a BFS under the condition of unweighted graphs
   + Code admitted: *BFS_move.py* at 15/09/2019, *DFS_move.py* at 16/09/2019, *IDDFS_move.py* at 21/09/2019
-  + With the will to automatically analyse the code, update *AutomaticGetStatistics.sh* (**ATTENTION**: 1. Bug to be fixed: <u>after one iteration, script stops without a reasonable excuse</u>; 2. This script may not be useful in Windows)
+  + With the will to automatically analyse the code, update *AutomaticGetStatistics.sh* (**ATTENTION**: This script may not be useful in Windows)
   + Question found:
     + (**Solved**) Every turn, main program calls function *turn*, however I wrote the code with the imagination that only one call of this function and the pause of this thread. So it is necessary to make this code correct. -> Use a file *instructions.txt* to guide the rat
   	+ (**Solved**) While coding the DFS, the recursion can not be terminated. -> Have to clearly understand the termination condition for a recursion function
   	+ (**Solved**) In beam search, which cost fonction should be chosen for the heuristic cost? **Maybe** <u>Euclidean distance</u> is a good choice
   	+ (**Solved**) Also in beam search, how should we choose an approprate beam width, for 3 at most? For this reason, I am wandering if it is practical to use beam search in this game. -> It is not interesting
-	+ In shell script, how to automatically kill the process elegantly?
+  	+ (**Solved**) In shell script, how to automatically kill the process elegantly? -> No need, *pyrat.py* offer a setting to do the test
   + Lessons learned:
     + Before starting to code, it is vital to understand clearly the demand
-	+ In every recursion function, we must shrewdly consider all the possible conditions for the determination of a recursion or we will get lost and a stack overflow
-	+ Use Shell script to automatically do something interesting
+  	+ In every recursion function, we must shrewdly consider all the possible conditions for the determination of a recursion or we will get lost and a stack overflow
+  	+ Use Shell script to automatically do something interesting
 
 + **Lab3**: Implement Dijkstra's algorithm
-  + Code admitted: *Dijkstra_move* at 25/09/2019
+  + Code admitted: *Dijkstra_move* at 25/09/2019, *AutomaticGetStatistics.sh* at 26/09/2019
   + Question found:
     +  (**Solved**) Whilte trying to use *heapq.heappush(priorityQ, (, ))*, the order of the element containing tuple is not logical. -> Actually, *heapq.heappush()* use *\_\_ls\_\_()* to decide the order in a list
   + Lessons learned:

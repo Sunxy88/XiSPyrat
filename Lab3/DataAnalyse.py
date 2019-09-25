@@ -35,28 +35,16 @@ def addLables(f):
     return lables
 
 def main():
-    with open("BFS_data.txt", 'r') as f1:
+    with open("Dijkstra_data.txt", 'r') as f1:
         lables = addLables(f1)
         # print(lables)
         f1.seek(0, 0)
         table1 = fillTheTable(f1, lables)
 
-    with open("DFS_data.txt", 'r') as f1:
-        lables = addLables(f1)
-        f1.seek(0, 0)
-        table2 = fillTheTable(f1, lables)
-
-    with open("IDDFS_data.txt", 'r') as f1:
-        lables = addLables(f1)
-        f1.seek(0, 0)
-        table3 = fillTheTable(f1, lables)
     plt.figure()
 
     plt.subplot(2, 1, 1)
-    plt.plot([i for i in table1['Length']], table1['Moves'], color="r", label="BFS")
-    plt.plot([i for i in table2['Length']], table2['Moves'], color="g", label="DFS")
-    plt.plot([i for i in table3['Length']], table3['Moves'], color="y", label="IDDFS")
-
+    plt.plot([i for i in table1['Length']], table1['Moves'], color="r", label="Dijkstra")
     plt.legend(loc='upper left')
     plt.title("Moves / Size")
     plt.xlabel("Size of maze")
@@ -64,9 +52,7 @@ def main():
     plt.grid(True)
 
     plt.subplot(2, 2, 3)
-    plt.plot([i for i in table1['Length']], table1['Preparetime'], color='r', label="BFS")
-    plt.plot([i for i in table2['Length']], table2['Preparetime'], color="g", label="DFS")
-    plt.plot([i for i in table3['Length']], table3['Preparetime'], color="y", label="IDDFS")
+    plt.plot([i for i in table1['Length']], table1['Preparetime'], color='r', label="Dijkstra")
     plt.legend(loc='upper left')
     plt.title("Prepare time / Size")
     plt.xlabel("Size of maze")
@@ -74,9 +60,7 @@ def main():
     plt.grid(True)
 
     plt.subplot(2, 2, 4)
-    plt.plot([i for i in table1['Length']], table1['Turntime'], color='r', label="BFS")
-    plt.plot([i for i in table2['Length']], table2['Turntime'], color="g", label="DFS")
-    plt.plot([i for i in table3['Length']], table3['Turntime'], color="y", label="IDDFS")
+    plt.plot([i for i in table1['Length']], table1['Turntime'], color='r', label="Dijkstra")
     plt.legend(loc='upper left')
     plt.title("Turn time / Size")
     plt.xlabel("Size of maze")

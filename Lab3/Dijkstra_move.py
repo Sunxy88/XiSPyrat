@@ -35,15 +35,23 @@ class VertexDistance:
     def __init__(self, currentVertex, lastVertex, distance):
         """
         Generate a new instance to be stored in priority queue
+        Parameter:
+                    Three elementary data used to finish the algorithm
         """
         self.__vertex = currentVertex
         self.__father = lastVertex
         self.__distance = distance
     
     def __lt__(self, anotherVertexDistance):
+        """
+        For the heapq.heappush()
+        """
         return self.__distance < anotherVertexDistance.distance()
 
     def __str__(self):
+        """
+        For debug
+        """
         return str(self.vertex()) + ", " + str(self.distance())
 
     def distance(self):
@@ -114,7 +122,6 @@ def dijkstra(mazeMap, playerLocation, piecesOfCheese):
         for neighbor in mazeMap[currentVertex]:
             distanceViaCurrentVertex = distance + mazeMap[currentVertex][neighbor]
             addOrReplace(priorityQ, neighbor, distanceViaCurrentVertex, cellVisited, currentVertex)
-        lastVertex = currentVertex
 
     routeTable[currentVertex] = lastVertex
     return routeTable

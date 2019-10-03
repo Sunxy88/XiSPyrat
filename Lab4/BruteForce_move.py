@@ -28,6 +28,121 @@ metaGraphPath = {}
 instruction = []
 counter = 0
 
+def getMetaGraph(mazeMap, playerLocation, piecesOfCheese):
+    """
+    To get the metagraph of the maze and store all the locations of cheeses
+    """
+    metaGraph = {}
+    metaGraphPath = {}
+    metaGraph[playerLocation] = {}
+    metaGraphPath[playerLocation] = {}
+    for target in piecesOfCheese:
+        metaGraph[target] = {}
+        metaGraphPath[target] = {}
+        metaGraph[playerLocation][target], metaGraphPath[playerLocation][target] = getPath(mazeMap, playerLocation, target)
+        metaGraph[target][playerLocation] = metaGraph[playerLocation][target]
+        metaGraphPath[target][playerLocation] = metaGraphPath[playerLocation][target]
+    # print(metaGraph)
+    for source in piecesOfCheese:
+        for target in piecesOfCheese:
+            if source == target:
+                continue
+            metaGraph[source][target], metaGraphPath[source][target] = getPath(mazeMap, source, target)
+            metaGraph[target][source] = metaGraph[source][target]
+            # metaGraphPath[target][source] = metaGraphPath[source][target]
+    # print("Meta Graph Path")
+    # printMetaGraphPath(metaGraphPath)
+    # print("Meta Graph")
+    # printMetaGraphPath(metaGraph)
+    # print(metaGraphPath)
+    
+
+    return metaGraph, metaGraphPath
+
+def printMetaGraphPath(metaGraphPath):
+    """
+    For Test ONLY
+    """
+    for source in metaGraphPath:
+        print(source, metaGraphPath[source])
+        for target in metaGraphPath[source]:
+            print(metaGraphPath[source][target])
+
+# Brute force to get a shortest path
+def bruteForce(remaining, vertex, weight, path, metaGraph):
+    """
+    With metagraph gotton before, get the shortest path to get all chieces
+    """
+    global bestPath, bestWeight
+    if len(remaining) == 0:
+        if weight < bestWeight:
+            bestWeight = weight
+            bestPath = path[:]
+    else:
+        newRemaining = set(remaining)
+        newPath = path[:]
+        for next in remaining:
+            newRemaining.remove(next)
+            newPath.append(next)
+            bruteForce(newRemaining, next, weight + metaGraph[vertex][next], newPath, metaGraph)
+            newRemaining.add(next)
+            newPath.remove(next)
+
+###############################
+# Preprocessing function
+# The preprocessing function is called at the start of a game
+# It can be used to perform intensive computations that can be
+# used later to move the player in the maze.
+###############################
+# Arguments are:
+# mazeMap : dict(pair(int, int), dict(pair(int, int), int))
+# mazeWidth : int
+# mazeHeight : int
+# playerLocation : pair(int, int)
+# opponentLocation : pair(int,int)
+# piecesOfCheese : list(pair(int, int))
+# timeAllowed : float
+###############################
+# This function is not expected to return anything
+def preprocessing(mazeMap, mazeWidth, mazeHeight, playerLocation, opponentLocation, piecesOfCheese, timeAllowed):
+    global metaGraphPath, instruction
+    metaGraph, metaGraphPath = getMetaGraph(mazeMap, playerLocation, piecesOfCheese)
+    remaining = set(piecesOfCheese)
+    bruteForce(remaining, playerLocation, 0, [(0, 0)], metaGraph)
+    for i in range(1, len(bestPath)):
+        # print(bestPath[i - 1], bestPath[i], metaGraphPath[bestPath[i - 1]][bestPath[i]])
+        instruction.append(metaGraphPath[bestPath[i - 1]][bestPath[i]])
+    # for key in instruction:
+    #     print(key)
+    # raise KeyboardInterrupt
+
+###############################
+# Turn function
+# The turn function is called each time the game is waiting
+# for the player to make a decision (a move).
+###############################
+# Arguments are:
+# mazeMap : dict(pair(int, int), dict(pair(int, int), int))
+# mazeWidth : int
+# mazeHeight : int
+# playerLocation : pair(int, int)
+# opponentLocation : pair(int, int)
+# playerScore : float
+# opponentScore : float
+# piecesOfCheese : list(pair(int, int))
+# timeAllowed : float
+###############################
+# This function is expected to return a move
+def turn(mazeMap, mazeWidth, mazeHeight, playerLocation, opponentLocation, playerScore, opponentScore, piecesOfCheese, timeAllowed):
+    global counter
+    move = instruction[counter][playerLocation]
+    if tuple(np.add(playerLocation, DIRECTION_TO_CALCULATION[move])) not in instruction[counter].keys():
+        # print(instruction[counter])
+        counter += 1
+        # print(instruction[counter])
+    return move
+
+
 class VertexDistance:
     """
     A class created to simpolify the utilization of heapq.heappush()
@@ -147,9 +262,9 @@ def addOrReplace(priorityQ, vertex, distance, cellVisited, lastVertex):
             heapq.heappush(priorityQ, VertexDistance(vertex, lastVertex, distance))
     else:
         if distance < priorityQ[index].distance():
-            print("To be delated", priorityQ[index])
+            # print("To be delated", priorityQ[index])
             del priorityQ[index]
-            print("After delate", priorityQ[index])
+            # print("After delate", priorityQ[index])
             heapq.heappush(priorityQ, VertexDistance(vertex, lastVertex, distance))
 
 
@@ -175,93 +290,3 @@ def print_PQ(q):
 def getPath(mazeMap, playerLocation, destination):
     routeTable = dijkstra(mazeMap, playerLocation, destination)
     return findShortestPath(mazeMap, routeTable, destination)
-
-def getMetaGraph(mazeMap, playerLocation, piecesOfCheese):
-    """
-    To get the metagraph of the maze and store all the locations of cheeses
-    """
-    metaGraph = {}
-    metaGraphPath = {}
-    metaGraph[playerLocation] = {}
-    metaGraphPath[playerLocation] = {}
-    for target in piecesOfCheese:
-        metaGraph[target] = {}
-        metaGraphPath[target] = {}
-        metaGraph[playerLocation][target], metaGraphPath[playerLocation][target] = getPath(mazeMap, playerLocation, target)
-        metaGraph[target][playerLocation] = metaGraph[playerLocation][target]
-        metaGraphPath[target][playerLocation] = metaGraphPath[playerLocation][target]
-    # print(metaGraph)
-    for source in piecesOfCheese:
-        for target in piecesOfCheese:
-            if source == target:
-                continue
-            metaGraph[source][target], metaGraphPath[source][target] = getPath(mazeMap, playerLocation, target)
-            metaGraph[target][source] = metaGraph[source][target]
-            print(metaGraphPath)
-            metaGraphPath[source][target] = metaGraphPath[target][source]
-
-    return metaGraph, metaGraphPath
-
-# Brute force to get a shortest path
-def bruteForce(remaining, vertex, weight, path, metaGraph):
-    """
-    With metagraph gotton before, get the shortest path to get all chieces
-    """
-    global bestPath, bestWeight
-    if remaining.isEmpty():
-        if weight < bestWeight:
-            bestWeight = weight
-            bestPath = path[:]
-    else:
-        for next in remaining:
-            bruteForce(remaining.remove(next), next, weight + metaGraph[vertex][next], path.append(next), metaGraph)
-
-###############################
-# Preprocessing function
-# The preprocessing function is called at the start of a game
-# It can be used to perform intensive computations that can be
-# used later to move the player in the maze.
-###############################
-# Arguments are:
-# mazeMap : dict(pair(int, int), dict(pair(int, int), int))
-# mazeWidth : int
-# mazeHeight : int
-# playerLocation : pair(int, int)
-# opponentLocation : pair(int,int)
-# piecesOfCheese : list(pair(int, int))
-# timeAllowed : float
-###############################
-# This function is not expected to return anything
-def preprocessing(mazeMap, mazeWidth, mazeHeight, playerLocation, opponentLocation, piecesOfCheese, timeAllowed):
-    global metaGraphPath, instruction
-    metaGraph, metaGraphPath = getMetaGraph(mazeMap, playerLocation, piecesOfCheese)
-    remaining = set(piecesOfCheese)
-    bruteForce(remaining, playerLocation, 0, [], metaGraph)
-    for i in range(1, len(bestPath)):
-        instruction[i - 1] = metaGraphPath[bestPath[i - 1]][bestPath[i]]
-    
-
-
-###############################
-# Turn function
-# The turn function is called each time the game is waiting
-# for the player to make a decision (a move).
-###############################
-# Arguments are:
-# mazeMap : dict(pair(int, int), dict(pair(int, int), int))
-# mazeWidth : int
-# mazeHeight : int
-# playerLocation : pair(int, int)
-# opponentLocation : pair(int, int)
-# playerScore : float
-# opponentScore : float
-# piecesOfCheese : list(pair(int, int))
-# timeAllowed : float
-###############################
-# This function is expected to return a move
-def turn(mazeMap, mazeWidth, mazeHeight, playerLocation, opponentLocation, playerScore, opponentScore, piecesOfCheese, timeAllowed):
-    global counter
-    if playerLocation in piecesOfCheese:
-        counter += 1
-    move = instruction[counter][playerLocation]
-    return move

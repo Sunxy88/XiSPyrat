@@ -46,12 +46,19 @@ def main():
         # print(lables)
         f1.seek(0, 0)
         table2 = fillTheTable(f1, lables)
+    
+    with open("NaiveGreedy_data.txt", 'r') as f1:
+        lables = addLables(f1)
+        # print(lables)
+        f1.seek(0, 0)
+        table3 = fillTheTable(f1, lables)
 
     plt.figure()
 
     plt.subplot(2, 2, 3)
     plt.plot([i for i in table1['Length']], table1['Moves'], color="r", label="Brute Force")
-    plt.plot([i for i in table1['Length']], table2['Moves'], color="blue", label="Backtracking")
+    plt.plot([i for i in table2['Length']], table2['Moves'], color="blue", label="Backtracking")
+    plt.plot([i for i in table3['Length']], table3['Moves'], color="green", label="Naive Greedy")
     plt.legend(loc='upper left')
     plt.title("Moves / Pieces")
     plt.xlabel("Pieces of cheese")
@@ -60,7 +67,8 @@ def main():
 
     plt.subplot(2, 1, 1)
     plt.plot([i for i in table1['Length']], table1['Preparetime'], color='r', label="Brute Force")
-    plt.plot([i for i in table1['Length']], table2['Preparetime'], color='blue', label="Backtracking")
+    plt.plot([i for i in table2['Length']], table2['Preparetime'], color='blue', label="Backtracking")
+    plt.plot([i for i in table3['Length']], table3['Preparetime'], color="green", label="Naive Greedy")
     plt.legend(loc='upper left')
     plt.title("Prepare time / Pieces")
     plt.xlabel("Pieces of cheese")
@@ -69,7 +77,8 @@ def main():
 
     plt.subplot(2, 2, 4)
     plt.plot([i for i in table1['Length']], table1['Turntime'], color='r', label="Brute Force")
-    plt.plot([i for i in table1['Length']], table2['Turntime'], color='blue', label="Backtracking")
+    plt.plot([i for i in table2['Length']], table2['Turntime'], color='blue', label="Backtracking")
+    plt.plot([i for i in table3['Length']], table3['Turntime'], color="green", label="Naive Greedy")
     plt.legend(loc='upper left')
     plt.title("Turn time / Pieces")
     plt.xlabel("Pieces of cheese")

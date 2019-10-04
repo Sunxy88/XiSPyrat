@@ -1,11 +1,13 @@
 
-Length: 2	 Moves: 50.2 	 Prepare time: 0.00891733169555664 	 Turn time: 1.9542277404041324e-05 	
-Length: 3	 Moves: 35.1 	 Prepare time: 0.01852719783782959 	 Turn time: 2.0898407518523144e-05 	
-Length: 4	 Moves: 65.8 	 Prepare time: 0.031966543197631835 	 Turn time: 1.6623395965993582e-05 	
-Length: 5	 Moves: 64.9 	 Prepare time: 0.04764158725738525 	 Turn time: 1.5941701017328288e-05 	
-Length: 6	 Moves: 88.3 	 Prepare time: 0.06896488666534424 	 Turn time: 1.6248067975829353e-05 	
-Length: 7	 Moves: 78.9 	 Prepare time: 0.08892633914947509 	 Turn time: 1.5956690108608406e-05 	
-Length: 8	 Moves: 91.8 	 Prepare time: 0.11255118846893311 	 Turn time: 1.5015713247750005e-05 	
-Length: 9	 Moves: 92.7 	 Prepare time: 0.20029196739196778 	 Turn time: 1.5431914021201992e-05 	
-Length: 10	 Moves: 105.8 	 Prepare time: 0.502108383178711 	 Turn time: 1.4884943469815394e-05 	
-Length: 11	 Moves: 98.0 	 Prepare time: 4.122588682174682 	 Turn time: 1.5080567138156046e-05 	
+Length: 2	 Moves: 40.4 	 Prepare time: 0.008955836296081543 	 Turn time: 2.5682479903184773e-05 	
+Length: 3	 Moves: 34.8 	 Prepare time: 0.020092868804931642 	 Turn time: 1.9380099406705528e-05 	
+Length: 4	 Moves: 73.4 	 Prepare time: 0.030373573303222656 	 Turn time: 1.4853355222260967e-05 	
+Length: 5	 Moves: 64.4 	 Prepare time: 0.049566912651062014 	 Turn time: 1.5696778426249183e-05 	
+Length: 6	 Moves: 77.2 	 Prepare time: 0.06743414402008056 	 Turn time: 1.655401769613239e-05 	
+Length: 7	 Moves: 62.4 	 Prepare time: 0.09644503593444824 	 Turn time: 1.7039114327518834e-05 	
+Length: 8	 Moves: 91.1 	 Prepare time: 0.13519678115844727 	 Turn time: 1.556909503260523e-05 	
+Length: 9	 Moves: 92.9 	 Prepare time: 0.2419734239578247 	 Turn time: 1.6385116273574068e-05 	
+Length: 10	 Moves: 94.3 	 Prepare time: 0.4958524703979492 	 Turn time: 1.5365413198448414e-05 	
+Length: 11	 Moves: 105.8 	 Prepare time: 3.4970942974090575 	 Turn time: 1.6182025971589102e-05 	
+Length: 12	 Moves: 107.7 	 Prepare time: 37.12218263149261 	 Turn time: 1.5634413028415214e-05 	
+Length: 13	 Moves: 117.5 	 Prepare time: 64.34752311706544 	 Turn time: 1.6397609831958852e-05 	

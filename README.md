@@ -40,5 +40,15 @@ Talk is cheap! I will show you my code.
     + Meet *heapq*, and understand how it decides the order of a heap
     + Reload operators
     + In binary balance tree (AVL Tree), two kinds of rorations (**hard to under stand** and [click here](https://en.wikipedia.org/wiki/AVL_tree) to know more) are used to keep the **balance factor** under 2
+
++ **Lab4**: Implement bruteforce and backtracking algorithm to get multiple pieces of cheese
+  + Code admitted: *BruteForce_move.py* at 01/10/2019, *Backtracking_move.py* at 01/10/2019 and *NaiveGreedy.py*
+
++ **Lab5**: Implement heuristic to speed up the preprocessing
+	+ Code admitted: *GeneticAlgorithm.py* at 10/10/2019
+	+ Question found:
+		+ Results of *GeneticAlgorithm* is not that good, have to tune parameters to make it faster and solutions better
+	+ Lessons learned:
+		+ Genetic algorithm can provide a solution of a question even we only know how to judge a solution
 ---
 **Xidian University / IMT Atlantique**

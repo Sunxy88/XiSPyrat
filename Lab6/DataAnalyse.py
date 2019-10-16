@@ -35,13 +35,13 @@ def addLables(f):
     return lables
 
 def main():
-    with open("Genetic_data3.txt", 'r') as f1:
+    with open("Genetic_data.txt", 'r') as f1:
         lables = addLables(f1)
         # print(lables)
         f1.seek(0, 0)
         table1 = fillTheTable(f1, lables)
 
-    with open("NaiveGreedy_data3.txt", 'r') as f1:
+    with open("NaiveGreedy_data.txt", 'r') as f1:
         lables = addLables(f1)
         # print(lables)
         f1.seek(0, 0)

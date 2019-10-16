@@ -32,6 +32,7 @@ metaGraphPath = {}
 instruction = []
 counter = 0
 SCORE_NONE = -1 # Used to initialize the score for each individual
+metaGraph = {}
 
 class Life(object):
       """
@@ -169,7 +170,8 @@ class Population(object):
             self.generation += 1
 
 class TSP:
-    def __init__(self, metaGraph, aLifeCount = 200):
+    def __init__(self, metaGraph, playerLocation,aLifeCount = 200):
+        self.playerLocation = playerLocation
         self.metaGraph = metaGraph
         self.initCitys(metaGraph)
         self.lifeCount = aLifeCount
@@ -190,8 +192,10 @@ class TSP:
         
 
     def distance(self, order):
-        distance = 0.0
-        for i in range(-1, len(self.cities) - 1):
+        index1 = order[1]
+        # print(self.playerLocation, self.cities[index1])
+        distance = metaGraph[self.playerLocation][self.cities[index1]]
+        for i in range(1, len(self.cities) - 1):
             index1, index2 = order[i], order[i + 1]
             city1, city2 = self.cities[index1], self.cities[index2]
             # distance += math.sqrt((city1[0] - city2[0]) ** 2 + (city1[1] - city2[1]) ** 2)
@@ -215,7 +219,7 @@ class TSP:
 
 
 def preprocessing(mazeMap, mazeWidth, mazeHeight, playerLocation, opponentLocation, piecesOfCheese, timeAllowed):
-    global metaGraphPath, instruction
+    global metaGraphPath, instruction, metaGraph
     metaGraph, metaGraphPath = getMetaGraph(mazeMap, playerLocation, piecesOfCheese)
     orderCal = {}
     for index, vertex in enumerate(metaGraph.keys()):
@@ -228,7 +232,7 @@ def preprocessing(mazeMap, mazeWidth, mazeHeight, playerLocation, opponentLocati
             continue
         metaGraphWithoutStart[vertex] = metaGraph[vertex]
 
-    tsp = TSP(metaGraphWithoutStart)
+    tsp = TSP(metaGraphWithoutStart, playerLocation)
     order = tsp.run(80)
     order = [x + 1 for x in order]
     order.insert(0, 0)
@@ -250,6 +254,9 @@ def turn(mazeMap, mazeWidth, mazeHeight, playerLocation, opponentLocation, playe
         # print(instruction[counter])
     move = instruction[counter][playerLocation]
     return move
+
+
+
 
 # Here is the code for dijkstra algorithm to be used for a metagraph
 class VertexDistance:

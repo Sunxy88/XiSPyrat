@@ -50,5 +50,14 @@ Talk is cheap! I will show you my code.
 		+ Results of *GeneticAlgorithm* is not that good, have to tune parameters to make it faster and solutions better
 	+ Lessons learned:
 		+ Genetic algorithm can provide a solution of a question even we only know how to judge a solution
+
++ **Lab6**: Refactor the genetic algorithm in speeding up to get a metagraph, so it is practical to use genetic graph in maze where there are 41 cheeses.
+	+ Code admitted: *Winner.py* at 01/11/2019
+	+ Question found:
+		+ The implementation of dijkstra before (in which I use heapq) is in a way much slower than the implementation now, maybe there is something redundant calculations.
+	+ Lessons learned:
+		+ It is meaningless to optimize your code before it is done, and also not useful to optimize some minor details. Doing so only makes your code hard to read and confusing.
+	+ Work could be done:
+		+ To tune the parameters in the genetic algorithm could be annoying, should find a way to do it elegently and efficiently.
 ---
 **Xidian University / IMT Atlantique**
